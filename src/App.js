@@ -67,7 +67,8 @@ const App = (props) => {
   const deleteOne = (index) => {
     const newTasks = [...todos];
     newTasks.splice(index, 1);
-    setTodos(newTasks);
+    console.log(index)
+   
     fetch('https://assets.breatheco.de/apis/fake/todos/user/cmoore', {
       method: "PUT",
       body: JSON.stringify(newTasks),
@@ -78,6 +79,7 @@ const App = (props) => {
       .then(res => res.json())
       .then(data => {
         console.log("Task deleted:", newTasks);
+        setTodos(newTasks);
       })
       .catch(err => console.error(err));
   };
@@ -150,8 +152,9 @@ const App = (props) => {
                 colors="outline:#121331,primary:#30e849,secondary:#ebe6ef"
                 stroke="100"
                 style={{ width: "30px", height: "30px" }}
+                data-index={index}
 
-                onClick={deleteOne}
+                onClick={()=>deleteOne(index)}
               >
 
               </lord-icon></li>
